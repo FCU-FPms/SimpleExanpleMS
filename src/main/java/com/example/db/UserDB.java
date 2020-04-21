@@ -19,10 +19,6 @@ public class UserDB {
 
     }
 
-    public String getPhone(int userId) {
-        User user = getUser(userId);
-        return user.getPhoneNumber();
-    }
 
     public List<User> getUsers() {
         List<User> users = new ArrayList<User>();
@@ -68,6 +64,64 @@ public class UserDB {
         }
         return user;
 
+    }
+
+    public User getUser(String name) {
+        User user = null;
+        Connection connection = mySqlConnection.getDBConnection();
+        String sqlString = "select * from userData where userName=?";
+        try {
+            PreparedStatement preStmt = connection.prepareStatement(sqlString);
+            preStmt.setString(1, name);
+            ResultSet rs = preStmt.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String userPhone = rs.getString("userPhone");
+                String userName = rs.getString("userName");
+                user = new User(id, userPhone, userName);
+            }
+            connection.close();
+
+        } catch (Exception ex) {
+            System.out.println("Error: "+ex);
+        }
+        return user;
+
+    }
+
+    public boolean createUser(String name, String userPhone) {
+
+        boolean is_success = false;
+        Connection connection = mySqlConnection.getDBConnection();
+        String sqlString = "INSERT INTO userData(userPhone,userName) VALUES(?, ?)";
+        try {
+            PreparedStatement preStmt = connection.prepareStatement(sqlString);
+            preStmt.setString(1, userPhone);
+            preStmt.setString(2, name);
+            preStmt.executeUpdate();
+            connection.close();
+            is_success = true;
+        } catch (Exception ex) {
+            System.out.println("Error: "+ex);
+        }
+        return is_success;
+    }
+
+    public boolean deleteUser(String name) {
+
+        boolean is_success = false;
+        Connection connection = mySqlConnection.getDBConnection();
+        String sqlString = "DELETE FROM `userData` WHERE userName=?";
+        try {
+            PreparedStatement preStmt = connection.prepareStatement(sqlString);
+            preStmt.setString(1, name);
+            preStmt.executeUpdate();
+            connection.close();
+            is_success = true;
+        } catch (Exception ex) {
+            System.out.println("Error: "+ex);
+        }
+        return is_success;
     }
 
 

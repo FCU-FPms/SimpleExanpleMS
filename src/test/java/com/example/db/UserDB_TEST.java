@@ -1,13 +1,32 @@
 package com.example.db;
+import com.example.data.User;
+import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class UserDB_TEST {
 
     @Test
-    public void getPhone_TEST() {
+    public void createUser_TEST(){ // Create new User
         UserDB userDB = UserDB.getInstance();
-        String phoneNumber = userDB.getPhone(1);
-        assertEquals("0911111111", phoneNumber);
+        assertTrue(userDB.createUser("unitTestUser", "0912345678"));
     }
+
+    @Test
+    public void getUser_TEST() {
+        UserDB userDB = UserDB.getInstance();
+        User user = userDB.getUser("unitTestUser");
+        assertEquals("0912345678", user.getPhoneNumber());
+        assertEquals("unitTestUser", user.getUserName());
+    }
+
+    @Test
+    public void deleteUser_TEST() {
+        UserDB userDB = UserDB.getInstance();
+        assertTrue(userDB.deleteUser("unitTestUser"));
+    }
+
+
 }
