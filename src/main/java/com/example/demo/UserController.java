@@ -36,7 +36,7 @@ public class UserController {
     }
 
     @GetMapping("/{userId}")
-    public ResponseEntity<Object> getUser(@PathVariable int userId){
+    public ResponseEntity<Object> getUser(@PathVariable int userId) {
 
         User user = userDB.getUser(userId);
 
@@ -52,5 +52,36 @@ public class UserController {
         return new ResponseEntity<Object>(entity, headers, HttpStatus.OK);
 
     }
+
+    @PostMapping(value = "")
+    public ResponseEntity<String> createUser(@RequestParam String name, @RequestParam String phone) {
+        boolean is_success = userDB.createUser(name, phone);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json");
+
+        if(is_success) {
+            return new ResponseEntity<String>("is_success", headers, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<String>("Error", headers, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @DeleteMapping(value = "/{name}")
+    public ResponseEntity<String> deleteUser(@PathVariable String name) {
+        boolean is_success = userDB.deleteUser(name);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json");
+
+        if(is_success) {
+            return new ResponseEntity<String>("is_success", headers, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<String>("Error", headers, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
+
 
 }
