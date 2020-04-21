@@ -1,0 +1,129 @@
+{
+	"info": {
+		"_postman_id": "d461ed67-4a13-4959-9e59-d60e4fb9fa66",
+		"name": "FP_ms",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "example_ms",
+			"item": [
+				{
+					"name": "create_user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://140.134.26.71:50501/SimpleExampleMS/users/?name=PostmanTestApi&phone=0912345678",
+							"protocol": "http",
+							"host": [
+								"140",
+								"134",
+								"26",
+								"71"
+							],
+							"port": "50501",
+							"path": [
+								"SimpleExampleMS",
+								"users",
+								""
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "PostmanTestApi"
+								},
+								{
+									"key": "phone",
+									"value": "0912345678"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllUser",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://140.134.26.71:50501/SimpleExampleMS/users",
+							"protocol": "http",
+							"host": [
+								"140",
+								"134",
+								"26",
+								"71"
+							],
+							"port": "50501",
+							"path": [
+								"SimpleExampleMS",
+								"users"
+							]
+						},
+						"description": "test get all users"
+					},
+					"response": []
+				},
+				{
+					"name": "get_A_User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://140.134.26.71:50501/SimpleExampleMS/users/13",
+							"protocol": "http",
+							"host": [
+								"140",
+								"134",
+								"26",
+								"71"
+							],
+							"port": "50501",
+							"path": [
+								"SimpleExampleMS",
+								"users",
+								"13"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteUser",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://140.134.26.71:50501/SimpleExampleMS/users/PostmanTestApi",
+							"protocol": "http",
+							"host": [
+								"140",
+								"134",
+								"26",
+								"71"
+							],
+							"port": "50501",
+							"path": [
+								"SimpleExampleMS",
+								"users",
+								"PostmanTestApi"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
