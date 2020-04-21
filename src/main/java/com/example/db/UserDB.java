@@ -24,7 +24,7 @@ public class UserDB {
         return user.getPhoneNumber();
     }
 
-    public List getUsers() {
+    public List<User> getUsers() {
         List<User> users = new ArrayList<User>();
 
         Connection connection = mySqlConnection.getDBConnection();

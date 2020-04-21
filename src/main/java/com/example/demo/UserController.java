@@ -25,6 +25,7 @@ public class UserController {
         for (User user : userList) { //拿到所有使用者
             JSONObject entity = new JSONObject();
             entity.put("id", user.getId());
+            entity.put("phoneNumber", user.getPhoneNumber());
             entities.add(entity);
         }
 
@@ -43,6 +44,7 @@ public class UserController {
 
         if(user != null) {
             entity.put("id", user.getId());
+            entity.put("phoneNumber", user.getPhoneNumber());
         }
 
         HttpHeaders headers = new HttpHeaders();
