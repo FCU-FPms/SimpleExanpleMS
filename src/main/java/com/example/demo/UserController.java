@@ -49,10 +49,25 @@ public class UserController {
             entities.put(String.valueOf(userId), entity);
         }
 
+    @GetMapping("/name/{userName}")
+    public ResponseEntity<Object> getUserByName(@PathVariable String userName) {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json");
-        return new ResponseEntity<Object>(entities, headers, HttpStatus.OK);
 
+        User user = userDB.getUser(userName);
+
+        Map<String, JSONObject> entities = new HashMap<String, JSONObject>();
+        if(user != null) {
+            JSONObject entity = new JSONObject();
+            int userId = user.getId();
+            entity.put("name", user.getUserName());
+            entity.put("phoneNumber", user.getPhoneNumber());
+
+            entities.put(String.valueOf(userId), entity);
+            return new ResponseEntity<Object>(entities, headers, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<Object>(headers, HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping(value = "")
