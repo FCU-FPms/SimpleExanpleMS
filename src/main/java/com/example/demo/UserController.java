@@ -21,13 +21,13 @@ public class UserController {
 
         List<User> userList = userDB.getUsers();
 
-        Map<Integer, JSONObject> entities = new HashMap<Integer, JSONObject>();
+        Map<String, JSONObject> entities = new HashMap<String, JSONObject>();
 
         for (User user : userList) { //拿到所有使用者
             JSONObject entity = new JSONObject();
-            int id = user.getId();
+            int userId = user.getId();
             entity.put("phoneNumber", user.getPhoneNumber());
-            entities.put(id, entity);
+            entities.put(String.valueOf(userId), entity);
         }
 
         HttpHeaders headers = new HttpHeaders();
@@ -36,17 +36,17 @@ public class UserController {
 
     }
 
-    @GetMapping("/{userId}")
-    public ResponseEntity<Object> getUser(@PathVariable int userId) {
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getUser(@PathVariable int id) {
 
-        User user = userDB.getUser(userId);
+        User user = userDB.getUser(id);
 
-        Map<Integer, JSONObject> entities = new HashMap<Integer, JSONObject>();
+        Map<String, JSONObject> entities = new HashMap<String, JSONObject>();
         if(user != null) {
             JSONObject entity = new JSONObject();
-            int id = user.getId();
+            int userId = user.getId();
             entity.put("phoneNumber", user.getPhoneNumber());
-            entities.put(id, entity);
+            entities.put(String.valueOf(userId), entity);
         }
 
         HttpHeaders headers = new HttpHeaders();
