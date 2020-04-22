@@ -18,6 +18,8 @@ public class UserController {
 
     @GetMapping(value ="")
     public ResponseEntity<Object> getUsers(){
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json");
 
         List<User> userList = userDB.getUsers();
 
@@ -26,18 +28,20 @@ public class UserController {
         for (User user : userList) { //拿到所有使用者
             JSONObject entity = new JSONObject();
             int userId = user.getId();
+            entity.put("name", user.getUserName());
             entity.put("phoneNumber", user.getPhoneNumber());
+
             entities.put(String.valueOf(userId), entity);
         }
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Content-Type", "application/json");
         return new ResponseEntity<Object>(entities, headers, HttpStatus.OK);
 
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Object> getUser(@PathVariable int id) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json");
 
         User user = userDB.getUser(id);
 
@@ -45,9 +49,15 @@ public class UserController {
         if(user != null) {
             JSONObject entity = new JSONObject();
             int userId = user.getId();
+            entity.put("name", user.getUserName());
             entity.put("phoneNumber", user.getPhoneNumber());
+
             entities.put(String.valueOf(userId), entity);
+            return new ResponseEntity<Object>(entities, headers, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<Object>(headers, HttpStatus.NOT_FOUND);
         }
+    }
 
     @GetMapping("/name/{userName}")
     public ResponseEntity<Object> getUserByName(@PathVariable String userName) {
