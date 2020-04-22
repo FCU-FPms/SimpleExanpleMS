@@ -6,8 +6,9 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value ="/users")
@@ -20,13 +21,13 @@ public class UserController {
 
         List<User> userList = userDB.getUsers();
 
-        List<JSONObject> entities = new ArrayList<JSONObject>();
+        Map<Integer, JSONObject> entities = new HashMap<Integer, JSONObject>();
 
         for (User user : userList) { //拿到所有使用者
             JSONObject entity = new JSONObject();
-            entity.put("id", user.getId());
+            int id = user.getId();
             entity.put("phoneNumber", user.getPhoneNumber());
-            entities.add(entity);
+            entities.put(id, entity);
         }
 
         HttpHeaders headers = new HttpHeaders();
@@ -40,16 +41,17 @@ public class UserController {
 
         User user = userDB.getUser(userId);
 
-        JSONObject entity = new JSONObject();
-
+        Map<Integer, JSONObject> entities = new HashMap<Integer, JSONObject>();
         if(user != null) {
-            entity.put("id", user.getId());
+            JSONObject entity = new JSONObject();
+            int id = user.getId();
             entity.put("phoneNumber", user.getPhoneNumber());
+            entities.put(id, entity);
         }
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json");
-        return new ResponseEntity<Object>(entity, headers, HttpStatus.OK);
+        return new ResponseEntity<Object>(entities, headers, HttpStatus.OK);
 
     }
 
