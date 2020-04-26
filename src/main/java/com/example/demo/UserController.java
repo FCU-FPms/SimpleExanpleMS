@@ -88,9 +88,9 @@ public class UserController {
         headers.add("Content-Type", "application/json");
 
         if(is_success) {
-            return new ResponseEntity<String>("is_success", headers, HttpStatus.OK);
+            return new ResponseEntity<String>(headers, HttpStatus.CREATED);
         } else {
-            return new ResponseEntity<String>("Error", headers, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<String>("Error to build User in DB", headers, HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -102,9 +102,9 @@ public class UserController {
         headers.add("Content-Type", "application/json");
 
         if(is_success) {
-            return new ResponseEntity<String>("is_success", headers, HttpStatus.OK);
+            return new ResponseEntity<String>(headers, HttpStatus.NO_CONTENT);
         } else {
-            return new ResponseEntity<String>("Error", headers, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<String>("Error to delete User in DB", headers, HttpStatus.BAD_REQUEST);
         }
     }
 
