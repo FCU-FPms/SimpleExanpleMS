@@ -1,0 +1,283 @@
+{
+	"info": {
+		"_postman_id": "32ec13b4-4e3a-4936-9772-112df75569da",
+		"name": "FP_ms",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "example_ms",
+			"item": [
+				{
+					"name": "create_user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2073343c-1272-4d95-8227-8aeb04b1da60",
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://140.134.26.71:50501/SimpleExampleMS/users/?name=PostmanTestApi&phone=0912345678",
+							"protocol": "http",
+							"host": [
+								"140",
+								"134",
+								"26",
+								"71"
+							],
+							"port": "50501",
+							"path": [
+								"SimpleExampleMS",
+								"users",
+								""
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "PostmanTestApi"
+								},
+								{
+									"key": "phone",
+									"value": "0912345678"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "29469f92-5923-4c11-9aee-a0fa4aa7d810",
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "d2824c2f-1f74-49c5-bf6f-9b8e924b54ef",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://140.134.26.71:50501/SimpleExampleMS/users",
+							"protocol": "http",
+							"host": [
+								"140",
+								"134",
+								"26",
+								"71"
+							],
+							"port": "50501",
+							"path": [
+								"SimpleExampleMS",
+								"users"
+							]
+						},
+						"description": "test get all users"
+					},
+					"response": []
+				},
+				{
+					"name": "get_A_User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8bd5005a-d58b-4dc8-a608-75675c5fbcbd",
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://140.134.26.71:50501/SimpleExampleMS/users/29",
+							"protocol": "http",
+							"host": [
+								"140",
+								"134",
+								"26",
+								"71"
+							],
+							"port": "50501",
+							"path": [
+								"SimpleExampleMS",
+								"users",
+								"29"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUserByName",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6e58e9a1-8855-48ca-bab9-d829088bd885",
+								"exec": [
+									"pm.test(\"includes name: PostmanTestApi\",function(){\r",
+									"    pm.expect(pm.response.text()).to.include(\"PostmanTestApi\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"includes phoneNumber: 0912345678\",function(){\r",
+									"    pm.expect(pm.response.text()).to.include(\"0912345678\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://140.134.26.71:50501/SimpleExampleMS/users/name/PostmanTestApi",
+							"protocol": "http",
+							"host": [
+								"140",
+								"134",
+								"26",
+								"71"
+							],
+							"port": "50501",
+							"path": [
+								"SimpleExampleMS",
+								"users",
+								"name",
+								"PostmanTestApi"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b51b00c6-25cb-482c-9ab8-4219338ace84",
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://140.134.26.71:50501/SimpleExampleMS/users/PostmanTestApi",
+							"protocol": "http",
+							"host": [
+								"140",
+								"134",
+								"26",
+								"71"
+							],
+							"port": "50501",
+							"path": [
+								"SimpleExampleMS",
+								"users",
+								"PostmanTestApi"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "微服務API範例",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "ae380abb-c8db-44e8-9e02-a32bc25af725",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "954eccdd-9577-48fb-8677-4ba16ead0d8e",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "fc276265-ec8f-46a1-9be0-387bff3d1bec",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "e00fd09a-8d6e-4706-9c12-21fedffc2463",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
